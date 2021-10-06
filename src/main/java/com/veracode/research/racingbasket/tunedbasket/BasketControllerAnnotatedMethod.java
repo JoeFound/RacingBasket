@@ -1,18 +1,20 @@
-package com.veracode.research.racingbasket.basket;
+package com.veracode.research.racingbasket.tunedbasket;
 
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.WebApplicationContext;
 
 @RestController
-@RequestMapping("basket")
-public class BasketController {
+@RequestMapping("sessmethodbasket")
+public class BasketControllerAnnotatedMethod {
     private double basketTotal = 0;
     private final double couponValue = 18.93;
     private String validCoupon = "XXX-YYY-ZZZ";
 
     @GetMapping("enter-coupon")
     @ResponseBody
+    @Scope(WebApplicationContext.SCOPE_SESSION)
     public double enterCoupon(@RequestParam String value) {
         basketTotal = 58.93;
         if (value.equals(this.validCoupon)) {

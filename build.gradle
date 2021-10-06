@@ -12,6 +12,10 @@ jar {
 	}
 }
 
+springBoot {
+	mainClass = "com.veracode.research.racingbasket.RacingBasketApplication"
+}
+
 group = 'com.veracode.research'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = JavaVersion.VERSION_1_8
