@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta content='width=device-width, initial-scale=1' name='viewport'>
+    <title>Brace for your next Race - Basket</title>
+    <link href='/css/bootstrap.min.css' rel='stylesheet'>
+    <link href='/css/font-awesome.min.css' rel='stylesheet'>
+    <link href='/css/style.css' rel="stylesheet">
+    <script src='/scripts/jquery.min.js' type='text/javascript'></script>
+</head>
+<body class='snippet-body' oncontextmenu='return false'>
+<div class="card">
+    <div class="row">
+        <div class="col-md-8 cart">
+            <div class="title">
+                <div class="row">
+                    <div class="col">
+                        <h4><b>Shopping Cart</b></h4>
+                    </div>
+                    <div class="col align-self-center text-right text-muted">3 items</div>
+                </div>
+            </div>
+            <div class="row border-top border-bottom">
+                <div class="row main align-items-center">
+                    <div class="col-2"><img class="img-fluid" src="/images/pi_GH235Z001_s.JPG"></div>
+                    <div class="col">
+                        <div class="row text-muted">Drinkware</div>
+                        <div class="row">Basecamp Tundra Bottle</div>
+                    </div>
+                    <div class="col"><a href="#">-</a><a class="border" href="#">1</a><a href="#">+</a></div>
+                    <div class="col">&euro; 16.99 <span class="close">&#10005;</span></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="row main align-items-center">
+                    <div class="col-2"><img class="img-fluid" src="/images/pi_VB235Z001_s.JPG"></div>
+                    <div class="col">
+                        <div class="row text-muted">Bags</div>
+                        <div class="row">Graphite Delux 15" Computer Backpack</div>
+                    </div>
+                    <div class="col"><a href="#">-</a><a class="border" href="#">1</a><a href="#">+</a></div>
+                    <div class="col">&euro; 23.95 <span class="close">&#10005;</span></div>
+                </div>
+            </div>
+            <div class="row border-top border-bottom">
+                <div class="row main align-items-center">
+                    <div class="col-2"><img class="img-fluid" src="/images/pi_EC235Z001_s.JPG"></div>
+                    <div class="col">
+                        <div class="row text-muted">Office</div>
+                        <div class="row">Wireless Charger</div>
+                    </div>
+                    <div class="col"><a href="#">-</a><a class="border" href="#">1</a><a href="#">+</a></div>
+                    <div class="col">&euro; 12.99 <span class="close">&#10005;</span></div>
+                </div>
+            </div>
+            <div class="back-to-shop"><a href="#">&leftarrow;</a><span class="text-muted">Back to shop</span></div>
+        </div>
+        <div class="col-md-4 summary">
+            <div>
+                <h5><b>Summary</b></h5>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col" style="padding-left:0;">ITEMS 3</div>
+                <div class="col text-right">&euro; 53.93</div>
+            </div>
+            <form>
+                <p>SHIPPING</p> <select>
+                <option class="text-muted">Standard-Delivery- &euro;5.00</option>
+            </select>
+                <p>GIVE CODE - One Coupon Only</p>
+                <div><input class="mb-0 pb-0" id="coupon-code" placeholder="Enter your code">
+                    <!--                    <div class="alert alert-success">Coupon accepted</div>-->
+                </div>
+            </form>
+            <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+                <div class="col">TOTAL PRICE</div>
+                <div class="col text-right">&euro; <span id="total-field">--.--</span></div>
+            </div>
+            <button class="btn">CHECKOUT</button>
+        </div>
+    </div>
+</div>
+<script src='/scripts/bootstrap.bundle.min.js'
+        type='text/javascript'></script>
+<script>
+    function refreshTotal(tot) {
+        if (tot === "")
+            tot = "--.--";
+
+        $("#total-field").text(tot.toFixed(2));
+    }
+
+    $.get("/basket/total", function (data) {
+        refreshTotal(data);
+    });
+
+
+    $('#coupon-code').change(function () {
+        if (this.value === "") {
+            $.get("/basket/remove-coupon", function (data) {
+                refreshTotal(data);
+            });
+
+        } else {
+            $.get("/basket/enter-coupon", {"value": this.value}).done(function (data) {
+                refreshTotal(data);
+            });
+        }
+    });
+
+
+</script>
+</body>
+</html>
