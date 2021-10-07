@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.WebApplicationContext;
 
 @RestController
-@RequestMapping("sessmethodbasket")
+@RequestMapping("reqmethodbasket")
 public class BasketControllerAnnotatedMethod {
     private double basketTotal = 0;
     private final double couponValue = 18.93;
@@ -14,7 +14,7 @@ public class BasketControllerAnnotatedMethod {
 
     @GetMapping("enter-coupon")
     @ResponseBody
-    @Scope(WebApplicationContext.SCOPE_SESSION)
+    @Scope(WebApplicationContext.SCOPE_REQUEST)
     public double enterCoupon(@RequestParam String value) {
         basketTotal = 58.93;
         if (value.equals(this.validCoupon)) {
