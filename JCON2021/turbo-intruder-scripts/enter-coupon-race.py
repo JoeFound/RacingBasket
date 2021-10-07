@@ -5,7 +5,12 @@
 # - target.req is the target endpoint from where we launched TurboIntruder
 # - target.baseInput is the part of the request that was highlighted when we lanunched TurboIntruder
 # - target.endpoint is the endpoint relative to the request from where we launched TurboIntruder
-# - the values passed to engine.queue and RequestEngine can be hardcoded and don't need to be taken from target necessarily
+# - the values passed to engine.queue and RequestEngine can be hardcoded and
+#    don't need to be taken from target necessarily
+#
+#  Useful resources:
+#  - https://portswigger.net/research/turbo-intruder-embracing-the-billion-request-attack
+#  - https://github.com/PortSwigger/turbo-intruder/blob/master/decorators.md
 
 
 def queueRequests(target, wordlists):
